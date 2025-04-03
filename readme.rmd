@@ -1,0 +1,85 @@
+ 📖 README | 使用指南
+
+ 🌟 Overview | 概述
+这个项目主要用于处理基因表达数据，采用了一整套科学的工作流程，包括数据预处理、差异表达分析和 LASSO 回归分析。代码逻辑清晰，确保了结果的准确性和可复现性。
+
+ 🔍 Workflow | 工作流程
+ 1️⃣ Load Necessary Packages | 加载必要的库
+首先，我们会加载所有需要的 Python 或 R 依赖库，以便进行数据处理、可视化和统计分析。
+
+ 2️⃣ Set Paths & Create Output Directory | 设置路径 & 创建输出目录
+- 定义输入数据和输出结果的文件路径。
+- 检查并创建必要的目录，以确保结果能正确存储。
+
+ 3️⃣ Read Data | 读取数据
+📂 主要包括：
+- 训练集和验证集的数据。
+- 组信息和基因 ID 映射文件。
+
+ 4️⃣ Perform Gene Mapping & Remove ID Columns | 基因映射 & 移除 ID 列
+- 定义并调用 `map_gene_and_remove_id` 函数，进行基因 ID 映射，并移除不必要的列。
+
+ 5️⃣ Handle Missing Values | 处理缺失值
+- 将数据集中的 "null" 值替换为 `NA`。
+- 除“gene”列外，其余所有列转换为数值类型。
+
+ 6️⃣ Data Preprocessing | 数据预处理
+- 定义并调用 `preprocess_data` 函数，对数据进行：
+  ✅ 缺失值填充
+  ✅ `log1p` 转换
+  ✅ 归一化处理
+
+ 7️⃣ Gene Intersection & Data Filtering | 交集基因筛选 & 数据过滤
+🔗 获取训练集和验证集的共同基因，并基于这些基因筛选数据。
+✅ 确保训练集和验证集的基因完全一致。
+💾 保存处理后的数据。
+
+ 8️⃣ Differential Expression Analysis | 差异表达分析
+🔬 进行差异表达分析，找出显著的差异基因。
+📊 生成数据可视化图表。
+
+ 9️⃣ Handle Outliers | 处理异常值
+- 定义并调用 `remove_outliers` 函数，去除数据中的异常值。
+
+ 🔟 Generate Visualization Plots | 生成可视化图表
+- 定义 `generate_plots` 函数，绘制训练集和验证集的多个图表，以便更直观地分析数据。
+
+ 1️⃣1️⃣ LASSO Regression Analysis (First Iteration) | LASSO 回归分析 (第一次迭代)
+📥 数据准备：
+- 重新读取部分数据。
+- 进行 LASSO 回归分析：
+  - 转置、合并、分组训练数据。
+  - 准备训练数据。
+  - 对齐基因、合并组别，准备验证数据。
+
+🎯 模型训练 & 评估：
+- 采用交叉验证选择最佳 `lambda` 值。
+- 训练 LASSO 模型并预测验证集数据。
+- 导出预测值、实际值、残差以及模型系数。
+- 📈 生成真实值 vs. 预测值的可视化图表。
+
+ 1️⃣2️⃣ LASSO Regression Analysis (Second Iteration) | LASSO 回归分析 (第二次迭代)
+📥 重新读取数据，并使用固定的 `lambda` 值进行 LASSO 回归。
+📊 预处理过程与第一次类似，但使用不同的文件路径。
+📌 训练 LASSO 模型，预测验证集数据，导出结果。
+📈 绘制交叉验证曲线、LASSO 路径图及回归系数图。
+
+ 📂 Output Files | 输出文件
+📜 主要包括：
+- 处理后的训练集和验证集数据。
+- 差异表达分析结果及图表。
+- LASSO 回归的预测结果、残差、回归系数。
+- 其他数据可视化图表。
+
+ ⚙️ Requirements | 运行环境
+🛠️ 运行代码前，请确保：
+- 你已安装 Python/R 及所需的库。
+- 数据文件格式正确，路径设置无误。
+
+ 💡 Notes | 注意事项
+⚠️ 运行代码前，请先检查文件路径是否正确。
+⚙️ 你可以调整超参数，以优化模型性能。
+
+ 📬 Contact | 联系方式
+如果遇到问题或需要帮助，欢迎联系项目成员！🎉
+
